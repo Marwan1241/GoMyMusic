@@ -34,23 +34,19 @@ function App() {
         });
       });
 
+
       spotify.getUserPlaylists().then((playlists) => {
         dispatch({
           type: "SET_PLAYLISTS",
           playlists,
         });
       });
-
-      spotify.getPlaylist('37i9dQZEVXcP2UnRe1AIcY').then ((response) => {
-        dispatch({
-          type: "SET_DISCOVER_WEEKLY",
-          discover_weekly: response,
-        })
-      });
-
-
+     
     }
+
+    console.log('I have a token here 🔑' , _token);
   }, []);
+
 
 
   return (
