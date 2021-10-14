@@ -1,23 +1,47 @@
 import React , { useState, useEffect } from 'react';
 import '../css/Header.css';
+import Footer from './Footer';
 import TrackSearchResult from './TrackSearchResult';
 import { Avatar } from "@material-ui/core";
 import { Container, Form } from "react-bootstrap";
 import { useDataLayerValue } from '../DataLayer';
 import SpotifyWebApi from 'spotify-web-api-node';
+import axios from 'axios';
+
 
 const spotifyApi = new SpotifyWebApi({
     clientId: "1d3e07a3ae5b46a794e9aecf8aabce39",
-    clientSecret: "8c23977395034aae80a1578bb073fdf8",
 });
 
 function Header() {
     const [{ user , token } , dispatch] = useDataLayerValue();
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-    console.log(searchResults);
+    const [playingTrack, setPlayingTrack] = useState();
+    const [lyrics, setLyrics] = useState("");
 
-    
+    function chooseTrack(track) {
+        setPlayingTrack(track)
+        setSearch('');
+        setLyrics('');
+    }
+
+    useEffect(() => {
+        if (!playingTrack) return
+
+        axios
+        .get('http://localhost:3000/lyrics', {
+            params: {
+                track: playingTrack.title,
+                artist: playingTrack.artist,
+            },
+        })
+        .then(res => {
+            setLyrics(res.data.lyrics)
+        })
+    },[playingTrack])
+
+
     useEffect(() => {
         if(!token) return
         spotifyApi.setAccessToken(token);
@@ -65,8 +89,16 @@ function Header() {
 
                     <div className="felx-grow-1 my-2" style={{ overflowY:'auto'}}>
                         {searchResults.map(track => (
-                            <TrackSearchResult track={track} key={track.uri} />
+                            <TrackSearchResult track={track} key={track.uri} chooseTrack={chooseTrack} />
                         ))}
+                        {searchResults.length === 0 && (
+                            <div className='text-center' style={{ whitespace: "pre" }}>
+                                {lyrics}
+                            </div>
+                        )}
+                    </div>
+                    <div>
+                    <Footer accessToken={token} trackUri={playingTrack?.uri} />
                     </div>
                 </Container>
 

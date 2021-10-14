@@ -1,17 +1,29 @@
 .footer{
+    z-index: 1;
     position: fixed;
-    display: flex;
-    justify-content: space-between;
     bottom: 0;
-    height: 65px;
-    width: 98%;
+    height: 50px;
+    width: 75%;
     background-color: #282828;
     padding: 20px;
     color:white;
+    border-radius: 10px;
 }
 
-.SpotifyPlayer{
-    background-color: #282828 ;
+.PlayerRSWP{
+    background-color: #282828 !important;
+}
+
+._SliderRSWP.__181lube{
+    background-color: #8c0512 !important;
+}
+
+span{
+    color: white !important;
+}
+
+button{
+    color: white !important;
 }
 
 .footer__right * .MuiSlider-root {

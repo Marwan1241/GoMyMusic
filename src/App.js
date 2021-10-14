@@ -9,6 +9,7 @@ import SpotifyWebApi from "spotify-web-api-js";
 import { useDataLayerValue } from './DataLayer';
 
 const spotify = new SpotifyWebApi();
+const lyricsFinder = require("lyrics-finder");
 
 function App() {
   const [{user, token}, dispatch] = useDataLayerValue();
@@ -46,8 +47,6 @@ function App() {
 
     console.log('I have a token here 🔑' , _token);
   }, []);
-
-
 
   return (
     <div className="app">

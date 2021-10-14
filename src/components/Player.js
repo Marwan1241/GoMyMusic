@@ -14,8 +14,6 @@ function Player({ spotify }) {
             <Sidebar />
             <Body spotify={spotify}/>
             </div>
-
-            <Footer accessToken={token} />
         </div>
     )
 }

@@ -2,7 +2,8 @@
     display: grid;
     place-items: center;
     height: 100vh;
-    background-color: black;
+    background: rgb(137,9,9);
+    background: linear-gradient(22deg, rgba(137,9,9,1) 0%, rgba(0,0,0,1) 65%);
 }
 
 .login > img {

@@ -2,8 +2,9 @@
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 //const redirectUri = "https://gomymusic.herokuapp.com/";
-const redirectUri = "http://localhost:3000/";
+const redirectUri = "https://gomymusic.herokuapp.com/";
 const clientId = "1d3e07a3ae5b46a794e9aecf8aabce39";
+
 
 const scopes = [
   "user-read-currently-playing",
